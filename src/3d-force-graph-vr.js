@@ -96,6 +96,8 @@ export default Kapsule({
   },
 
   init(domNode, state) {
+    const scale = 0.001
+
     // Wipe DOM
     domNode.innerHTML = '';
 
@@ -121,8 +123,8 @@ export default Kapsule({
     // Add camera and cursor
     let cameraG;
     scene.appendChild(cameraG = document.createElement('a-entity'));
-    cameraG.setAttribute('position', '0 0 300');
-    cameraG.setAttribute('movement-controls', 'fly: true; speed: 7');
+    cameraG.setAttribute('position', `0 0 ${300 * scale}`);
+    cameraG.setAttribute('movement-controls', `fly: true; speed: ${50 * scale}`);
 
     let camera;
     cameraG.appendChild(camera = document.createElement('a-entity'));
@@ -139,6 +141,8 @@ export default Kapsule({
     // Add forcegraph entity
     scene.appendChild(state.forcegraph = document.createElement('a-entity'));
     state.forcegraph.setAttribute('forcegraph', null);
+    state.forcegraph.setAttribute('position', '0 1.5 0');
+    state.forcegraph.object3D.scale.multiplyScalar(scale);
 
     // attach scene
     state.container.appendChild(scene);
